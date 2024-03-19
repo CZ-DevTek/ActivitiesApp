@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ActivityCell: UICollectionViewCell {
+final class ActivityCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
 
 }
