@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
+final class RandomActivityViewController: UIViewController {
 
     
     @IBOutlet var activityLabel: UILabel!
