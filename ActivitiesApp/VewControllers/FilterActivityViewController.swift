@@ -20,11 +20,11 @@ final class FilterActivityViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if segue.identifier == "showParticipants" {
                 if let participantsVC = segue.destination as? ParticipantsViewController {
-                    participantsVC.fetchActivity()
+                    participantsVC.fetchParticipantsActivity()
                 }
             } else if segue.identifier == "showType" {
                 if let typeVC = segue.destination as? TypeViewController {
-                    typeVC.fetchActivity()
+                    typeVC.fetchTypeActivity()
                 }
             }
         }

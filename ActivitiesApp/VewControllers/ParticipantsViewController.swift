@@ -23,10 +23,10 @@ final class ParticipantsViewController: UIViewController {
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fetchActivity()
+        fetchParticipantsActivity()
     }
 
-    func fetchActivity() {
+    func fetchParticipantsActivity() {
         networkManager.fetch(Activity.self, from: Link.participantsURL.url) { [weak self] result in
             guard let self = self else { return }
             switch result {

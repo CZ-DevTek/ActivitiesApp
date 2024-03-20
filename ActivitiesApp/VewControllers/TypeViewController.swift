@@ -14,7 +14,6 @@ final class TypeViewController: UIViewController {
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     
-    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     private let networkManager = NetworkManager.shared
@@ -24,10 +23,10 @@ final class TypeViewController: UIViewController {
         
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fetchActivity()
+        fetchTypeActivity()
     }
     
-    func fetchActivity() {
+    func fetchTypeActivity() {
         networkManager.fetch(Activity.self, from: Link.typeURL.url) { [weak self] result in
             guard let self = self else { return }
             switch result {
