@@ -14,7 +14,6 @@
 		4F36F3332BA71BDE00D1CE40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F36F3322BA71BDE00D1CE40 /* Assets.xcassets */; };
 		4F36F3362BA71BDE00D1CE40 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4F36F3352BA71BDE00D1CE40 /* Base */; };
 		4F36F3412BA71C4300D1CE40 /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36F3402BA71C4300D1CE40 /* Activities.swift */; };
-		4F36F3442BA74DDF00D1CE40 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F36F3432BA74DDF00D1CE40 /* ActivityCell.swift */; };
 		4F92A6A72BA76AE500F8A579 /* RandomActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92A6A62BA76AE500F8A579 /* RandomActivityViewController.swift */; };
 		4F92A6AB2BAA26AB00F8A579 /* ParticipantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92A6AA2BAA26AB00F8A579 /* ParticipantsViewController.swift */; };
 		4F92A6AD2BAA26CD00F8A579 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92A6AC2BAA26CD00F8A579 /* TypeViewController.swift */; };
@@ -33,7 +32,6 @@
 		4F36F3352BA71BDE00D1CE40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F36F3372BA71BDE00D1CE40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F36F3402BA71C4300D1CE40 /* Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
-		4F36F3432BA74DDF00D1CE40 /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		4F92A6A62BA76AE500F8A579 /* RandomActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomActivityViewController.swift; sourceTree = "<group>"; };
 		4F92A6AA2BAA26AB00F8A579 /* ParticipantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsViewController.swift; sourceTree = "<group>"; };
 		4F92A6AC2BAA26CD00F8A579 /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				4F36F33D2BA71BF300D1CE40 /* VewControllers */,
-				4F36F3422BA74DBE00D1CE40 /* Cells */,
 				4F36F33E2BA71C0B00D1CE40 /* Storyboards */,
 				4F36F33F2BA71C1D00D1CE40 /* Models */,
 				4F92A6B22BAB548A00F8A579 /* Services */,
@@ -113,14 +110,6 @@
 				4F36F3402BA71C4300D1CE40 /* Activities.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		4F36F3422BA74DBE00D1CE40 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				4F36F3432BA74DDF00D1CE40 /* ActivityCell.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		4F92A6B22BAB548A00F8A579 /* Services */ = {
@@ -207,7 +196,6 @@
 				4F36F32E2BA71BDC00D1CE40 /* TabBarViewController.swift in Sources */,
 				4F92A6AF2BAA2B7A00F8A579 /* FilterActivityViewController.swift in Sources */,
 				4F92A6B42BAB54B800F8A579 /* NetworkManager.swift in Sources */,
-				4F36F3442BA74DDF00D1CE40 /* ActivityCell.swift in Sources */,
 				4F92A6B12BAA45C400F8A579 /* HomeViewController.swift in Sources */,
 				4F92A6AD2BAA26CD00F8A579 /* TypeViewController.swift in Sources */,
 				4F92A6A72BA76AE500F8A579 /* RandomActivityViewController.swift in Sources */,
