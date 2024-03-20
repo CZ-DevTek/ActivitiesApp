@@ -14,7 +14,7 @@ final class RandomActivityViewController: UIViewController {
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    
+    @IBOutlet var reloadButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     private let networkManager = NetworkManager.shared
@@ -47,4 +47,8 @@ final class RandomActivityViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func reloadButtonPressed(_ sender: Any) {
+            fetchRandomActivity()
+        }
 }

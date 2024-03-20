@@ -129,10 +129,25 @@
                                             <constraint firstItem="JmU-Df-bUQ" firstAttribute="centerX" secondItem="rAy-V1-zQu" secondAttribute="centerX" id="xz9-h1-dgg"/>
                                         </constraints>
                                     </stackView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="agD-hi-ECs">
+                                        <rect key="frame" x="170" y="517" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hsj-Cx-YmY">
+                                        <rect key="frame" x="93" y="554" width="174" height="51"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Reload">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="reloadButtonPressed:" destination="KTI-Kj-Gdh" eventType="touchUpInside" id="OVY-Ew-HEs"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstItem="rAy-V1-zQu" firstAttribute="centerX" secondItem="OX7-2V-Ouj" secondAttribute="centerX" id="6c6-rs-vKR"/>
+                                    <constraint firstItem="Hsj-Cx-YmY" firstAttribute="centerX" secondItem="OX7-2V-Ouj" secondAttribute="centerX" id="9PD-lj-KHh"/>
                                     <constraint firstItem="m4D-Rt-m3d" firstAttribute="width" secondItem="OX7-2V-Ouj" secondAttribute="width" multiplier="0.545706" id="N0Z-ny-5mj"/>
                                     <constraint firstItem="rAy-V1-zQu" firstAttribute="leading" secondItem="OX7-2V-Ouj" secondAttribute="leading" constant="21" id="e0q-g6-K8Q"/>
                                     <constraint firstItem="m4D-Rt-m3d" firstAttribute="centerX" secondItem="OX7-2V-Ouj" secondAttribute="centerX" id="ihn-lP-uhn"/>
@@ -150,6 +165,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OX7-2V-Ouj" firstAttribute="top" secondItem="qEH-XU-MNV" secondAttribute="top" constant="51" id="BTk-O1-M5H"/>
+                            <constraint firstItem="qEH-XU-MNV" firstAttribute="bottom" secondItem="Hsj-Cx-YmY" secondAttribute="bottom" constant="54" id="KHb-Y2-rNX"/>
+                            <constraint firstItem="Hsj-Cx-YmY" firstAttribute="leading" secondItem="qEH-XU-MNV" secondAttribute="leading" constant="109" id="SBg-tQ-IqO"/>
                             <constraint firstItem="OX7-2V-Ouj" firstAttribute="leading" secondItem="qEH-XU-MNV" secondAttribute="leading" constant="16" id="et3-1t-P8W"/>
                             <constraint firstItem="qEH-XU-MNV" firstAttribute="trailing" secondItem="OX7-2V-Ouj" secondAttribute="trailing" constant="16" id="f37-o7-AoZ"/>
                             <constraint firstItem="qEH-XU-MNV" firstAttribute="bottom" secondItem="OX7-2V-Ouj" secondAttribute="bottom" constant="36" id="rwV-Ud-GQE"/>
@@ -165,12 +182,13 @@
                         <outlet property="activityLabel" destination="SHj-py-bjq" id="Qih-TF-lWb"/>
                         <outlet property="participantsLabel" destination="rGn-yN-B2Z" id="7Fz-Wa-GC0"/>
                         <outlet property="priceLabel" destination="0Wr-eH-ThQ" id="08H-is-m8u"/>
+                        <outlet property="reloadButton" destination="Hsj-Cx-YmY" id="VZ6-9Q-7lB"/>
                         <outlet property="typeLabel" destination="JmU-Df-bUQ" id="qtH-jS-ufq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6j2-g0-eLn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7773" y="-261"/>
+            <point key="canvasLocation" x="7771.7557251908393" y="-261.26760563380282"/>
         </scene>
         <!--Filter-->
         <scene sceneID="Zhm-J0-OqP">
@@ -200,28 +218,28 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IE-8H-E6c">
-                                <rect key="frame" x="77" y="289.33333333333331" width="239" height="47.666666666666686"/>
+                                <rect key="frame" x="77" y="289.33333333333331" width="239" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Participants">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Participants">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="participantsButtonPressed:" destination="nyV-C4-bmh" eventType="touchUpInside" id="Jc5-dD-h5w"/>
                                     <segue destination="n58-yx-j0c" kind="show" identifier="showParticipants" id="6y1-hR-G6S"/>
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcZ-or-v9g">
-                                <rect key="frame" x="77" y="568.33333333333337" width="239" height="47.666666666666629"/>
+                                <rect key="frame" x="77" y="570" width="239" height="46"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Type of Activities">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Type of Activities">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="typeButtonPressed:" destination="nyV-C4-bmh" eventType="touchUpInside" id="LiI-QG-ZlU"/>
                                     <segue destination="iPV-sw-hA6" kind="show" identifier="showType" id="qdH-Td-bbP"/>
@@ -380,7 +398,7 @@
         <!--Participants View Controller-->
         <scene sceneID="DRq-w6-VFt">
             <objects>
-                <viewController storyboardIdentifier="showParticipants" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n58-yx-j0c" customClass="ParticipantsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showParticipants" useStoryboardIdentifierAsRestorationIdentifier="YES" id="n58-yx-j0c" customClass="ParticipantsViewController" customModule="ActivitiesApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hbx-RW-5G9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
