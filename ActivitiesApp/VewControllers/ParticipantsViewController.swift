@@ -16,9 +16,7 @@ final class ParticipantsViewController: UIViewController {
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    var url: URL {
-        return URL(string: "http://www.boredapi.com/api/activity?participants=1")!
-    }
+    private let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,17 +26,11 @@ final class ParticipantsViewController: UIViewController {
         fetchActivity()
     }
 
-        private func fetchActivity() {
-            URLSession.shared.dataTask(with: url) { [unowned self] data, _, error in
-                guard let data = data else {
-                    print(error?.localizedDescription ?? "No error description")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let activity = try decoder.decode(Activity.self, from: data)
-                    
+    func fetchActivity() {
+        networkManager.fetch(Activity.self, from: Link.participantsURL.url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+                case .success(let activity):
                     DispatchQueue.main.async {
                         self.activityLabel.text = "Activity: \(activity.activity)"
                         self.typeLabel.text = "Type of Activity: \(activity.type)"
@@ -46,9 +38,9 @@ final class ParticipantsViewController: UIViewController {
                         self.priceLabel.text = "Price in BitCoins: \(activity.price)"
                         self.activityIndicator.stopAnimating()
                     }
-                } catch {
-                    print("Error decoding JSON: \(error.localizedDescription)")
-                }
-            }.resume()
+                case .failure(let error):
+                    print("Error fetching activity for single participant: \(error)")
+            }
         }
     }
+}
