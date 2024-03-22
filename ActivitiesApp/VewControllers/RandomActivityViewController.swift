@@ -7,19 +7,17 @@
 
 import UIKit
 
-final class DetailViewController: UIViewController {
-
+final class RandomActivityViewController: UIViewController {
+    
     
     @IBOutlet var activityLabel: UILabel!
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    
+    @IBOutlet var reloadButton: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    var url: URL {
-        return URL(string: "https://www.boredapi.com/api/activity/")!
-    }
+    private let networkManager = NetworkManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,20 +27,14 @@ final class DetailViewController: UIViewController {
         priceLabel.layer.cornerRadius = 15
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fetchActivity()
+        fetchRandomActivity()
     }
-
-        private func fetchActivity() {
-            URLSession.shared.dataTask(with: url) { [unowned self] data, _, error in
-                guard let data = data else {
-                    print(error?.localizedDescription ?? "No error description")
-                    return
-                }
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let activity = try decoder.decode(Activity.self, from: data)
-                    
+    
+    func fetchRandomActivity() {
+        NetworkManager.shared.fetch(Activity.self, from: Link.randomURL.url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+                case .success(let activity):
                     DispatchQueue.main.async {
                         self.activityLabel.text = "Activity: \(activity.activity)"
                         self.typeLabel.text = "Type of Activity: \(activity.type)"
@@ -50,9 +42,13 @@ final class DetailViewController: UIViewController {
                         self.priceLabel.text = "Price in BitCoins: \(activity.price)"
                         self.activityIndicator.stopAnimating()
                     }
-                } catch {
-                    print("Error decoding JSON: \(error.localizedDescription)")
-                }
-            }.resume()
+                case .failure(let error):
+                    print("Error fetching random activity: \(error)")
+            }
         }
     }
+    
+    @IBAction func reloadButtonPressed(_ sender: Any) {
+            fetchRandomActivity()
+        }
+}
