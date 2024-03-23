@@ -13,29 +13,30 @@ final class TypeViewController: UIViewController {
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
+    @IBOutlet var typeTitle: UILabel!
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var selectedType: String = ""
-        
-        private let networkManager = NetworkManager.shared
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            activityIndicator.startAnimating()
-            activityIndicator.hidesWhenStopped = true
-            fetchActivity()
+    
+    private let networkManager = NetworkManager.shared
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        typeTitle.text = "\(selectedType)"
+        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
+        fetchActivity()
+    }
+    func fetchActivity() {
+        guard let url = URL(string: "https://www.boredapi.com/api/activity?type=\(selectedType)") else {
+            print("Invalid URL")
+            return
         }
-        func fetchActivity() {
-            guard let url = URL(string: "https://www.boredapi.com/api/activity?type=\(selectedType)") else {
-                print("Invalid URL")
-                return
-            }
-            
-            networkManager.fetch(Activity.self, from: url) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
+        
+        networkManager.fetch(Activity.self, from: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
                 case .success(let activity):
                     DispatchQueue.main.async {
                         self.activityLabel.text = "Activity: \(activity.activity)"
@@ -46,7 +47,14 @@ final class TypeViewController: UIViewController {
                     }
                 case .failure(let error):
                     print("Error fetching activity for single participant: \(error)")
-                }
             }
         }
     }
+    @IBAction func ReloadButton(_ sender: Any) {
+        fetchActivity()
+    }
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+}
