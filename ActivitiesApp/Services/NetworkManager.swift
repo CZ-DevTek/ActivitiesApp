@@ -18,9 +18,9 @@ enum Link {
         case .randomURL:
             return URL(string: "https://www.boredapi.com/api/activity/")!
         case .participantsURL:
-            return URL(string: "http://www.boredapi.com/api/activity?participants=1")!
+            return URL(string: "https://www.boredapi.com/api/activity/")!
         case .typeURL:
-            return URL(string: "http://www.boredapi.com/api/activity?type=recreational")!
+            return URL(string: "https://www.boredapi.com/api/activity/")!
         }
     }
 }

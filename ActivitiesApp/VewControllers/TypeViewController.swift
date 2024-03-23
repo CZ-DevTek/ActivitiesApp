@@ -16,31 +16,37 @@ final class TypeViewController: UIViewController {
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
-    private let networkManager = NetworkManager.shared
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var selectedType: String = ""
         
-        activityIndicator.startAnimating()
-        activityIndicator.hidesWhenStopped = true
-        fetchTypeActivity()
-    }
-    
-    func fetchTypeActivity() {
-        networkManager.fetch(Activity.self, from: Link.typeURL.url) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let activity):
-                DispatchQueue.main.async {
-                    self.activityLabel.text = "Activity: \(activity.activity)"
-                    self.typeLabel.text = "Type of Activity: \(activity.type)"
-                    self.participantsLabel.text = "Number of participants: \(activity.participants)"
-                    self.priceLabel.text = "Price in BitCoins: \(activity.price)"
-                    self.activityIndicator.stopAnimating()
+        private let networkManager = NetworkManager.shared
+        
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            activityIndicator.startAnimating()
+            activityIndicator.hidesWhenStopped = true
+            fetchActivity()
+        }
+        func fetchActivity() {
+            guard let url = URL(string: "https://www.boredapi.com/api/activity?type=\(selectedType)") else {
+                print("Invalid URL")
+                return
+            }
+            
+            networkManager.fetch(Activity.self, from: url) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let activity):
+                    DispatchQueue.main.async {
+                        self.activityLabel.text = "Activity: \(activity.activity)"
+                        self.typeLabel.text = "Type of Activity: \(activity.type)"
+                        self.participantsLabel.text = "Number of participants: \(activity.participants)"
+                        self.priceLabel.text = "Price in BitCoins: \(activity.price)"
+                        self.activityIndicator.stopAnimating()
+                    }
+                case .failure(let error):
+                    print("Error fetching activity for single participant: \(error)")
                 }
-            case .failure(let error):
-                print("Error fetching activity for single participant: \(error)")
             }
         }
     }
-}

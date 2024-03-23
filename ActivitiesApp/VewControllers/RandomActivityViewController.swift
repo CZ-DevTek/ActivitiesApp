@@ -27,10 +27,10 @@ final class RandomActivityViewController: UIViewController {
         priceLabel.layer.cornerRadius = 15
         activityIndicator.startAnimating()
         activityIndicator.hidesWhenStopped = true
-        fetchRandomActivity()
+        fetchActivity()
     }
     
-    func fetchRandomActivity() {
+    func fetchActivity() {
         NetworkManager.shared.fetch(Activity.self, from: Link.randomURL.url) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -49,6 +49,6 @@ final class RandomActivityViewController: UIViewController {
     }
     
     @IBAction func reloadButtonPressed(_ sender: Any) {
-            fetchRandomActivity()
+            fetchActivity()
         }
 }
