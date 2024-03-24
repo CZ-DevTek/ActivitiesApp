@@ -14,7 +14,6 @@ final class TypeViewController: UIViewController {
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var typeTitle: UILabel!
-    
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     var selectedType: String = ""
@@ -33,8 +32,7 @@ final class TypeViewController: UIViewController {
             print("Invalid URL")
             return
         }
-        
-        networkManager.fetch(Activity.self, from: url) { [weak self] result in
+        networkManager.fetchActivity(from: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
                 case .success(let activity):

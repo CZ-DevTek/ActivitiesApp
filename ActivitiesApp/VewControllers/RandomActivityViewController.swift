@@ -31,10 +31,10 @@ final class RandomActivityViewController: UIViewController {
     }
     
     func fetchActivity() {
-        NetworkManager.shared.fetch(Activity.self, from: Link.randomURL.url) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-                case .success(let activity):
+        networkManager.fetchActivity(from: Link.randomURL.url) { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let activity):
                     DispatchQueue.main.async {
                         self.activityLabel.text = "Activity: \(activity.activity)"
                         self.typeLabel.text = "Type of Activity: \(activity.type)"
@@ -47,8 +47,7 @@ final class RandomActivityViewController: UIViewController {
             }
         }
     }
-    
     @IBAction func reloadButtonPressed(_ sender: Any) {
-            fetchActivity()
-        }
+        fetchActivity()
+    }
 }

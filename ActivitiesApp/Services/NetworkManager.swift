@@ -9,22 +9,20 @@ import Foundation
 
 enum Link {
     case randomURL
-    case participantsURL
-    case typeURL
-
+    case participantsURL(Int)
+    case typeURL(String)
     
     var url: URL {
         switch self {
-        case .randomURL:
-            return URL(string: "https://www.boredapi.com/api/activity/")!
-        case .participantsURL:
-            return URL(string: "https://www.boredapi.com/api/activity/")!
-        case .typeURL:
-            return URL(string: "https://www.boredapi.com/api/activity/")!
+            case .randomURL:
+                return URL(string: "https://www.boredapi.com/api/activity/")!
+            case .participantsURL(let participants):
+                return URL(string: "https://www.boredapi.com/api/activity?participants=\(participants)")!
+            case .typeURL(let type):
+                return URL(string: "https://www.boredapi.com/api/activity?type=\(type)")!
         }
     }
 }
-
 enum NetworkError: Error {
     case invalidURL
     case noData
@@ -36,24 +34,19 @@ final class NetworkManager {
     
     private init() {}
     
-    func fetch<T: Decodable>(_ type: T.Type, from url: URL, completion: @escaping(Result<T, NetworkError>) -> Void) {
+    func fetchActivity(from url: URL, completion: @escaping (Result<Activity, NetworkError>) -> Void) {
         URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data else {
-                print(error?.localizedDescription ?? "No error description")
+            guard let data = data, error == nil else {
                 completion(.failure(.noData))
                 return
             }
             
             do {
-                let decoder = JSONDecoder()
-                let dataModel = try decoder.decode(T.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(dataModel))
-                }
+                let activity = try JSONDecoder().decode(Activity.self, from: data)
+                completion(.success(activity))
             } catch {
                 completion(.failure(.decodingError))
             }
-            
         }.resume()
     }
 }

@@ -13,7 +13,6 @@ final class ParticipantsViewController: UIViewController {
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var participantsLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    
     @IBOutlet var participantsTitle: UILabel!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
@@ -34,8 +33,7 @@ final class ParticipantsViewController: UIViewController {
             print("Invalid URL")
             return
         }
-        
-        networkManager.fetch(Activity.self, from: url) { [weak self] result in
+        networkManager.fetchActivity(from: url) { [weak self] result in
             guard let self = self else { return }
             switch result {
                 case .success(let activity):
@@ -54,8 +52,6 @@ final class ParticipantsViewController: UIViewController {
     @IBAction func reloadButton(_ sender: Any) {
         fetchActivity()
     }
-    
-    
     @IBAction func backButtonPressed(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
