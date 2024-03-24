@@ -29,25 +29,27 @@ final class ParticipantsViewController: UIViewController {
     }
     
     private func fetchActivity() {
-        guard let url = URL(string: "https://www.boredapi.com/api/activity?participants=\(selectedParticipants)") else {
-            print("Invalid URL")
-            return
-        }
-        networkManager.fetchActivity(from: url) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-                case .success(let activity):
-                    DispatchQueue.main.async {
-                        self.activityLabel.text = "Activity: \(activity.activity)"
-                        self.typeLabel.text = "Type of Activity: \(activity.type)"
-                        self.participantsLabel.text = "Number of participants: \(activity.participants)"
-                        self.priceLabel.text = "Price in BitCoins: \(activity.price)"
-                        self.activityIndicator.stopAnimating()
-                    }
-                case .failure(let error):
-                    print("Error fetching activity for \(self.selectedParticipants) participants: \(error)")
+        let participantsURL = Link.participantsURL(selectedParticipants)
+        let url = participantsURL.url
+        NetworkManager.shared.fetchActivity(from: url) { [unowned self] result in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                switch result {
+                    case .success(let activities):
+                        if let activity = activities.first {
+                            self.updateUI(with: activity)
+                        }
+                    case .failure(let error):
+                        print("Error fetching random activity: \(error)")
+                }
             }
         }
+    }
+    private func updateUI(with activity: Activity) {
+        activityLabel.text = "Activity: \(activity.activity)"
+        typeLabel.text = "Type of Activity: \(activity.type)"
+        participantsLabel.text = "Number of participants: \(activity.participants)"
+        priceLabel.text = "Price in BitCoins: \(activity.price)"
     }
     @IBAction func reloadButton(_ sender: Any) {
         fetchActivity()
