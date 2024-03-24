@@ -28,7 +28,7 @@ final class ParticipantsViewController: UIViewController {
         fetchActivity()
     }
     
-    func fetchActivity() {
+    private func fetchActivity() {
         guard let url = URL(string: "https://www.boredapi.com/api/activity?participants=\(selectedParticipants)") else {
             print("Invalid URL")
             return

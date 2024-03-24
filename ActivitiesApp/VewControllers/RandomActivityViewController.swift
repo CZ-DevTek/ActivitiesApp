@@ -30,7 +30,7 @@ final class RandomActivityViewController: UIViewController {
         fetchActivity()
     }
     
-    func fetchActivity() {
+    private func fetchActivity() {
         networkManager.fetchActivity(from: Link.randomURL.url) { [weak self] result in
                     guard let self = self else { return }
                     switch result {
