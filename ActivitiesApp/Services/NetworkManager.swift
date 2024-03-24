@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum Link {
     case randomURL
@@ -34,19 +35,18 @@ final class NetworkManager {
     
     private init() {}
     
-    func fetchActivity(from url: URL, completion: @escaping (Result<Activity, NetworkError>) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else {
-                completion(.failure(.noData))
-                return
+    func fetchActivity(from url: URL, completion: @escaping(Result<[Activity], AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                    case .success(let value):
+                        let activities = Activity.getActivities(from: value)
+                        completion(.success(activities))
+                    case .failure(let error):
+                        print(error)
+                        completion(.failure(error))
+                }
             }
-            
-            do {
-                let activity = try JSONDecoder().decode(Activity.self, from: data)
-                completion(.success(activity))
-            } catch {
-                completion(.failure(.decodingError))
-            }
-        }.resume()
     }
 }
