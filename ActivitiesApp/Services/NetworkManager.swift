@@ -35,16 +35,21 @@ final class NetworkManager {
     
     private init() {}
     
-    func fetchActivity(from url: URL, completion: @escaping(Result<[Activity], AFError>) -> Void) {
+    func fetchActivity(from url: URL, completion: @escaping(Result<Activity, Error>) -> Void) {
         AF.request(url)
             .validate()
-            .responseJSON { dataResponse in
-                switch dataResponse.result {
-                    case .success(let value):
-                        let activities = Activity.getActivities(from: value)
-                        completion(.success(activities))
+            .responseData { response in
+                switch response.result {
+                    case .success(let data):
+                        do {
+                            let activity = try JSONDecoder().decode(Activity.self, from: data)
+                            completion(.success(activity))
+                        } catch {
+                            print("Decoding error:", error)
+                            completion(.failure(error))
+                        }
                     case .failure(let error):
-                        print(error)
+                        print("Network request error:", error)
                         completion(.failure(error))
                 }
             }

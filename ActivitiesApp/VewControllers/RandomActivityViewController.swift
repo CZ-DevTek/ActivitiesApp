@@ -34,13 +34,11 @@ final class RandomActivityViewController: UIViewController {
         NetworkManager.shared.fetchActivity(from: Link.randomURL.url) { [unowned self] result in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
-                switch result {
-                    case .success(let activities):
-                        if let activity = activities.first {
-                            self.updateUI(with: activity)
-                        }
-                    case .failure(let error):
-                        print("Error fetching random activity: \(error)")
+                            switch result {
+                            case .success(let activity):
+                                self.updateUI(with: activity)
+                            case .failure(let error):
+                                print("Error fetching random activity: \(error)")
                 }
             }
         }
